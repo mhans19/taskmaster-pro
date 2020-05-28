@@ -57,11 +57,6 @@ var auditTask = function(taskEl) {
   // apply new class if task is near/over due date
   if (moment().isAfter(time)) {
     $(taskEl).addClass("list-group-item-danger");
-  }
-
-  // apply new class if task is near/over due date
-  if (moment().isAfter(time)) {
-    $(taskEl).addClass("list-group-item-danger");
   } 
   else if (Math.abs(moment().diff(time, "days")) <= 2) {
     $(taskEl).addClass("list-group-item-warning");
@@ -208,6 +203,7 @@ $("#trash").droppable({
   tolerance: "touch",
   drop: function(event, ui) {
     ui.draggable.remove();
+    $(".bottom-trash").removeClass("bottom-trash-active");
   },
   over: function(event, ui) {
     $(".bottom-trash").addClass("bottom-trash-active");
@@ -272,4 +268,4 @@ setInterval(function () {
   $(".card .list-group-item").each(function (el) {
     auditTask(el);
   });
-}, 5000);
+}, (1000 * 60) * 30);
